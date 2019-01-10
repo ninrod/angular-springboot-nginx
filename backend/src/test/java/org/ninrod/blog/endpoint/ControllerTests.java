@@ -9,6 +9,7 @@ import org.ninrod.blog.user.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -27,9 +28,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(MainController.class)
 class ControllerTests {
-    @Autowired private MockMvc mvc;
-    @Autowired private PhraseService service;
-    @Autowired private UserService userService;
+    @Autowired
+    private MockMvc mvc;
+
+    @MockBean
+    private PhraseService service;
+
+    @MockBean
+    private UserService userService;
+
+    @MockBean
+    private UserRepository userRepository;
 
     @Test
     void shouldReturnHello() throws Exception {
@@ -38,7 +47,7 @@ class ControllerTests {
         mvc.perform(get("/").contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.content", is("${phrase}World")));
+                .andExpect(jsonPath("$.content", is(String.format("%sWorld!", phrase))));
     }
 
     @Test
@@ -46,9 +55,9 @@ class ControllerTests {
         String phrase = "Olá, ";
         when(service.phrase()).thenReturn(phrase);
         String exp = "NiNRoD";
-        mvc.perform(get("/?name=$exp").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get(String.format("/?name=%s", exp)).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content", is("$phrase$exp")));
+                .andExpect(jsonPath("$.content", is(String.format("%s%s!", phrase, exp))));
     }
 
     @Test
@@ -64,23 +73,5 @@ class ControllerTests {
         mvc.perform(get("/users").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].description", is(couves)));
-    }
-
-    @TestConfiguration
-    class Config {
-        @Bean
-        public UserRepository repo() {
-          return mock(UserRepository.class);
-        }
-
-        @Bean
-        public PhraseService service(){
-            return mock(PhraseService.class);
-        }
-
-        @Bean
-        public UserService userService() {
-            return mock(UserService.class);
-        }
     }
 }
