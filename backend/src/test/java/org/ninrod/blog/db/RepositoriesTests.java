@@ -15,6 +15,8 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.*;
 
+import static org.springframework.test.util.AssertionErrors.*;
+
 @DataJpaTest
 @ExtendWith(SpringExtension.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -29,7 +31,7 @@ class RepositoriesTests {
         Iterable<Usuario> found = repository.findAll();
         List<Usuario> usuarios = new ArrayList<>();
         found.forEach(usuarios::add);
-        assertThat("usuarios should be 1", usuarios.size() == 1);
+        assertEquals("there should be at least one user", true, usuarios.size() > 0);
     }
 
     @Test
