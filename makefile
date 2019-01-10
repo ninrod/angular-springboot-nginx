@@ -9,6 +9,9 @@ db:
 backend:
 	docker-compose up -d backend
 
+frontend:
+	docker-compose up -d frontend
+
 logsdb:
 	docker logs -f db
 
