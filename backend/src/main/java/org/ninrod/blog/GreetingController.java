@@ -4,8 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
-@RequestMapping("greeting")
 public class GreetingController {
     private final AtomicLong counter = new AtomicLong();
     private static final Logger log = LoggerFactory.getLogger(GreetingController.class);
@@ -33,12 +32,12 @@ public class GreetingController {
         this.userService = userService;
     }
 
-    @GetMapping(path = "/", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(path = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
         return new Greeting(counter.incrementAndGet(), service.phrase() + name + "!");
     }
 
-    @GetMapping(path = "/persist")
+    @RequestMapping(path = "/persist", method = RequestMethod.POST)
     public void persist() {
         Usuario juergen = new Usuario("springjuergen", "Juergen", "Hoeller", "blah");
         log.info("trying to persist ${juergen.firstname}");
@@ -46,7 +45,7 @@ public class GreetingController {
         log.info("${juergen.firstname} was persisted");
     }
 
-    @GetMapping(path = "/users", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(path = "/users", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Usuario> users() {
         log.info("trying to get users");
         List<Usuario> users = userService.getUsers();
