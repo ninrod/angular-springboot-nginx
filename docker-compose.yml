@@ -3,7 +3,7 @@ networks:
   internal-net:
    name: workbench_subnet
 services:
-  server:
+  backend:
     image: openjdk:11.0.1
     container_name: backend
     networks:
