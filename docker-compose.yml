@@ -4,7 +4,7 @@ networks:
    name: workbench_subnet
 services:
   server:
-    image: openjdk:8-jre
+    image: openjdk:11.0.1
     container_name: backend
     networks:
       - internal-net
