@@ -1,4 +1,4 @@
-package org.ninrod.blog.user;
+package org.ninrod.blog.greeting;
 
 public class Greeting {
     private Long id;

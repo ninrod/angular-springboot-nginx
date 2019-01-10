@@ -1,7 +1,7 @@
 package org.ninrod.blog.endpoint;
 
 import org.ninrod.blog.greeting.PhraseService;
-import org.ninrod.blog.user.Greeting;
+import org.ninrod.blog.greeting.Greeting;
 import org.ninrod.blog.user.UserRepository;
 import org.ninrod.blog.user.UserService;
 import org.ninrod.blog.user.Usuario;
