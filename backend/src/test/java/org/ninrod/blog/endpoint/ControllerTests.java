@@ -2,7 +2,6 @@ package org.ninrod.blog.endpoint;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.ninrod.blog.endpoint.MainController;
 import org.ninrod.blog.greeting.PhraseService;
 import org.ninrod.blog.user.UserRepository;
 import org.ninrod.blog.user.UserService;

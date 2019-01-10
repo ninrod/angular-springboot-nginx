@@ -13,7 +13,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class IntegrationTest {
+class IntegrationTests {
 
     @Autowired TestRestTemplate restTemplate;
 
