@@ -1,4 +1,4 @@
-package org.ninrod.blog;
+package org.ninrod.blog.user;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

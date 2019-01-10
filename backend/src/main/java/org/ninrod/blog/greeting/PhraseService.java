@@ -1,4 +1,4 @@
-package org.ninrod.blog;
+package org.ninrod.blog.greeting;
 
 import org.springframework.stereotype.Service;
 

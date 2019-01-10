@@ -1,4 +1,4 @@
-package org.ninrod.blog;
+package org.ninrod.blog.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

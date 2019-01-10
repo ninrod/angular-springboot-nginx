@@ -1,5 +1,10 @@
-package org.ninrod.blog;
+package org.ninrod.blog.endpoint;
 
+import org.ninrod.blog.greeting.PhraseService;
+import org.ninrod.blog.user.Greeting;
+import org.ninrod.blog.user.UserRepository;
+import org.ninrod.blog.user.UserService;
+import org.ninrod.blog.user.Usuario;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,16 +18,16 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
-public class GreetingController {
+public class MainController {
     private final AtomicLong counter = new AtomicLong();
-    private static final Logger log = LoggerFactory.getLogger(GreetingController.class);
+    private static final Logger log = LoggerFactory.getLogger(MainController.class);
 
     private UserRepository userRepo;
     private UserService userService;
     private PhraseService service;
 
     @Autowired
-    public GreetingController(
+    public MainController(
             UserRepository userRepo,
             PhraseService service,
             UserService userService

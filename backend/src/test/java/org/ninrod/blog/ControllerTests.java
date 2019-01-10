@@ -2,6 +2,11 @@ package org.ninrod.blog;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.ninrod.blog.endpoint.MainController;
+import org.ninrod.blog.greeting.PhraseService;
+import org.ninrod.blog.user.UserRepository;
+import org.ninrod.blog.user.UserService;
+import org.ninrod.blog.user.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -21,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(GreetingController.class)
+@WebMvcTest(MainController.class)
 class ControllerTests {
     @Autowired private MockMvc mvc;
     @Autowired private PhraseService service;

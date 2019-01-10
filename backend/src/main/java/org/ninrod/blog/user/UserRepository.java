@@ -1,4 +1,4 @@
-package org.ninrod.blog;
+package org.ninrod.blog.user;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
