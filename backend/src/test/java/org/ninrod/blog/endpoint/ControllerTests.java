@@ -1,4 +1,4 @@
-package org.ninrod.blog;
+package org.ninrod.blog.endpoint;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
