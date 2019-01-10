@@ -1,0 +1,41 @@
+* java-springboot2
+
+The main idea is to assemble a full working stack using springboot2 as a rest api server
+talking to a postgresql db using the latest and greatest comming from the java framework land.
+We'll use angular7 for the frontend served by nginx, our reverse proxy of choice.
+
+** stack
+
+| domain        | tech                                                            |
+|---------------+-----------------------------------------------------------------|
+| reverse proxy | dockerized nginx                                                |
+| frontend      | angular7                                                        |
+| backend       | dockerized springboot2 running on openjdk-11                    |
+| db            | dockerized postgresql                                           |
+| tests         | junit5 and mockito                                              |
+| logging       | logback                                                         |
+
+** building
+#+BEGIN_SRC shell
+
+# if you don't have a running postgresql container, spin up one:
+$ make db
+
+# first, build the backend
+$ cd backend && gradle build
+
+# now build the frontend
+$ cd frontend && yarn && yarn build
+
+#+END_SRC
+** running
+#+BEGIN_SRC shell
+$ make
+# then open your brower on http://localhost:4200
+#+END_SRC
+
+* LICENSE
+
+[[https://www.gnu.org/licenses/gpl-3.0.en.html][GNU General Public License v3]]
+
+Copyright (c) 2018 Filipe Silva (ninrod)

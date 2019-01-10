@@ -1,0 +1,16 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+  <hr/>
+
+  <h2>login: <em>{{(users|async)?.login}}</em></h2>
+  <h2>firstname: <em>{{(users|async)?.firstname}}</em></h2>
+  <h2>lastname: <em>{{(users|async)?.lastname}}</em></h2>
+  <h2>description: <em>{{(users|async)?.description}}</em></h2>
+</div>
+
+
+
+<router-outlet></router-outlet>

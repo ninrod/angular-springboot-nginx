@@ -1,0 +1,66 @@
+buildscript {
+    apply from: "$rootDir/functions.gradle"
+    repositories {
+        if (doWeHaveToUseArtifactory())
+            maven { url "${artifactory_gradle}"}
+        else
+            mavenCentral()
+    }
+    dependencies {
+        if (doWeHaveToUseArtifactory())
+            classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4+"
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springboot_version}")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlin_version}")
+        classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlin_version}")
+        classpath("org.jetbrains.kotlin:kotlin-noarg:$kotlin_version")
+    }
+}
+
+apply plugin: "kotlin"
+apply plugin: "kotlin-spring"
+apply plugin: "kotlin-jpa"
+apply plugin: "eclipse"
+apply plugin: "org.springframework.boot"
+apply plugin: "io.spring.dependency-management"
+
+group = "org.ninrod.blog"
+version = "0.0.1-SNAPSHOT"
+sourceCompatibility = 1.8
+compileKotlin {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xjsr305=strict"]
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xjsr305=strict"]
+        jvmTarget = "1.8"
+    }
+}
+
+repositories {
+    if (doWeHaveToUseArtifactory())
+        maven { url "${artifactory_gradle}"}
+    else
+        mavenCentral()
+}
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    compile("com.fasterxml.jackson.module:jackson-module-kotlin")
+    compile("org.jetbrains.kotlin:kotlin-reflect")
+    compile("org.postgresql:postgresql:9.4-1206-jdbc42")
+    testCompile("org.springframework.boot:spring-boot-starter-test") {
+        exclude module: "junit"
+    }
+    testCompile("org.junit.jupiter:junit-jupiter-api")
+    //testRuntimeOnly("com.h2database:h2:1.3.148")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+}
